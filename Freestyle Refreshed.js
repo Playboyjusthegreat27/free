@@ -8119,7 +8119,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 			var currentAnim = this.animation._curAnim;
 			switch(this.curCharacter) {
 			case "gf":
-				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(currentAnim == null || !StringTools.startsWith(currentAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8129,7 +8129,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-car":
-				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(currentAnim == null || !StringTools.startsWith(currentAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8139,7 +8139,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-christmas":
-				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(currentAnim == null || !StringTools.startsWith(currentAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8149,7 +8149,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-pixel":
-				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(currentAnim == null || !StringTools.startsWith(currentAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8159,7 +8159,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-pixel-glitch":
-				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(currentAnim == null || !StringTools.startsWith(currentAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8169,7 +8169,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "pico-gf":
-				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(currentAnim == null || !StringTools.startsWith(currentAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -108703,7 +108703,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 338935;
+	this.version = 183009;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
