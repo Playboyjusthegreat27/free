@@ -7640,7 +7640,7 @@ var Character = function(x,y,character,isPlayer) {
 		break;
 	case "bf-duet":
 		var library = null;
-		var tex1 = flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/bfDuet" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/bfDuet" + ".xml","TEXT",library));
+		var tex1 = flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/bfChristmas" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/bfChristmas" + ".xml","TEXT",library));
 		this.set_frames(tex1);
 		this.animation.addByPrefix("idle","BF idle dance",24,false);
 		this.animation.addByPrefix("singUP","BF NOTE UP0",24,false);
@@ -7717,7 +7717,7 @@ var Character = function(x,y,character,isPlayer) {
 		break;
 	case "bf-pixel-glitch":
 		var library = null;
-		this.set_frames(flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/bfPixelGlitch" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/bfPixelGlitch" + ".xml","TEXT",library)));
+		this.set_frames(flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/bfPixel" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/bfPixel" + ".xml","TEXT",library)));
 		this.animation.addByPrefix("idle","BF IDLE",24,false);
 		this.animation.addByPrefix("singUP","BF UP NOTE",24,false);
 		this.animation.addByPrefix("singLEFT","BF LEFT NOTE",24,false);
@@ -7852,7 +7852,7 @@ var Character = function(x,y,character,isPlayer) {
 		break;
 	case "gf-pixel-glitch":
 		var library = null;
-		tex = flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/gfPixelGlitch" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/gfPixelGlitch" + ".xml","TEXT",library));
+		tex = flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/gfPixel" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/gfPixel" + ".xml","TEXT",library));
 		this.set_frames(tex);
 		this.animation.addByIndices("singUP","GF IDLE",[2],"",24,false);
 		this.animation.addByIndices("danceLeft","GF IDLE",[30,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],"",24,false);
@@ -7985,7 +7985,7 @@ var Character = function(x,y,character,isPlayer) {
 		break;
 	case "pico-gf":
 		var library = null;
-		tex = flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/picoGf" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/picoGf" + ".xml","TEXT",library));
+		tex = flixel_graphics_frames_FlxAtlasFrames.fromSparrow(Paths.getPath("images/" + "characters/gfChristmas" + ".png","IMAGE",library),Paths.getPath("images/" + "characters/gfChristmas" + ".xml","TEXT",library));
 		this.set_frames(tex);
 		this.animation.addByIndices("singUP","GF Dancing Beat",[0],"",24,false);
 		this.animation.addByIndices("danceLeft","GF Dancing Beat",[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14],"",24,false);
@@ -108703,7 +108703,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 913261;
+	this.version = 418843;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
