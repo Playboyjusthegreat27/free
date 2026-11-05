@@ -8093,7 +8093,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 	,holdTimer: null
 	,update: function(elapsed) {
 		if(!StringTools.startsWith(this.curCharacter,"bf")) {
-			if(StringTools.startsWith(this.animation._curAnim.name,"sing")) {
+			if(this.animation._curAnim != null && StringTools.startsWith(this.animation._curAnim.name,"sing")) {
 				this.holdTimer += elapsed;
 			}
 			var dadVar = 4;
@@ -8107,7 +8107,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 			}
 		}
 		if(this.curCharacter == "gf") {
-			if(this.animation._curAnim.name == "hairFall" && this.animation._curAnim.finished) {
+			if(this.animation._curAnim != null && this.animation._curAnim.name == "hairFall" && this.animation._curAnim.finished) {
 				this.playAnim("danceRight");
 			}
 		}
@@ -108701,7 +108701,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 27403;
+	this.version = 38514;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
