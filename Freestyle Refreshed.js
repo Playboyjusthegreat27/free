@@ -8244,15 +8244,15 @@ Boyfriend.prototype = $extend(Character.prototype,{
 	stunned: null
 	,update: function(elapsed) {
 		if(!this.debugMode) {
-			if(StringTools.startsWith(this.animation._curAnim.name,"sing")) {
+			if(this.animation._curAnim != null && StringTools.startsWith(this.animation._curAnim.name,"sing")) {
 				this.holdTimer += elapsed;
 			} else {
 				this.holdTimer = 0;
 			}
-			if(StringTools.endsWith(this.animation._curAnim.name,"miss") && this.animation._curAnim.finished && !this.debugMode) {
+			if(this.animation._curAnim != null && StringTools.endsWith(this.animation._curAnim.name,"miss") && this.animation._curAnim.finished && !this.debugMode) {
 				this.playAnim("idle",true,false,10);
 			}
-			if(this.animation._curAnim.name == "firstDeath" && this.animation._curAnim.finished) {
+			if(this.animation._curAnim != null && this.animation._curAnim.name == "firstDeath" && this.animation._curAnim.finished) {
 				this.playAnim("deathLoop");
 			}
 		}
@@ -108701,7 +108701,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 38514;
+	this.version = 193368;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
