@@ -21119,7 +21119,8 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 		if(this.curBeat % this.gfSpeed == 0) {
 			PlayState.gf.dance();
 		}
-		if(!StringTools.startsWith(PlayState.boyfriend.animation._curAnim.name,"sing")) {
+		var currentBoyfriendAnim = PlayState.boyfriend.animation._curAnim;
+		if(currentBoyfriendAnim == null || !StringTools.startsWith(currentBoyfriendAnim.name,"sing")) {
 			PlayState.boyfriend.playAnim("idle");
 		}
 		if(this.curBeat % 8 == 7 && this.curSong == "Bopeebo") {
@@ -108702,7 +108703,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 379313;
+	this.version = 338935;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
