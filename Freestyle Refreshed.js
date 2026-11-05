@@ -19636,7 +19636,7 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 		}
 		var _this = flixel_FlxG.keys.justPressed;
 		if(_this.keyManager.checkStatusUnsafe(57,_this.status)) {
-			if(this.iconP1.animation._curAnim.name == "bf-old") {
+			if(this.iconP1.animation._curAnim != null && this.iconP1.animation._curAnim.name == "bf-old") {
 				this.iconP1.animation.play(PlayState.SONG.player1);
 			} else {
 				this.iconP1.animation.play("bf-old");
@@ -19723,7 +19723,7 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 		}
 		if(this.generatedMusic && PlayState.SONG.notes[this.curStep / 16 | 0] != null) {
 			if(this.allowedToHeadbang) {
-				if(PlayState.gf.animation._curAnim.name == "danceLeft" || PlayState.gf.animation._curAnim.name == "danceRight" || PlayState.gf.animation._curAnim.name == "idle") {
+				if(PlayState.gf.animation._curAnim != null && (PlayState.gf.animation._curAnim.name == "danceLeft" || PlayState.gf.animation._curAnim.name == "danceRight" || PlayState.gf.animation._curAnim.name == "idle")) {
 					switch(this.curSong) {
 					case "Blammed":
 						if(this.curBeat > 30 && this.curBeat < 190) {
@@ -19998,7 +19998,7 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 							if(Math.abs(daNote.noteData) == spr.ID) {
 								spr.animation.play("confirm",true);
 							}
-							if(spr.animation._curAnim.name == "confirm" && !StringTools.startsWith(PlayState.curStage,"school")) {
+							if(spr.animation._curAnim != null && spr.animation._curAnim.name == "confirm" && !StringTools.startsWith(PlayState.curStage,"school")) {
 								spr.centerOffsets();
 								var fh = spr.offset;
 								fh.set_x(fh.x - 13);
@@ -20064,7 +20064,7 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 		if(!this.inCutscene) {
 			this.keyShit();
 		}
-		if(this.glitching == false && PlayState.curStage == "schoolEvil" && PlayState.dad.animation._curAnim.name == "idle" && PlayState.boyfriend.animation._curAnim.name.indexOf("miss") == -1 && !this.glitchOveride) {
+		if(this.glitching == false && PlayState.curStage == "schoolEvil" && PlayState.dad.animation._curAnim != null && PlayState.dad.animation._curAnim.name == "idle" && PlayState.boyfriend.animation._curAnim != null && PlayState.boyfriend.animation._curAnim.name.indexOf("miss") == -1 && !this.glitchOveride) {
 			this.glitch(false);
 		}
 	}
@@ -20656,12 +20656,12 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 			}
 		});
 		if(PlayState.boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (holdArray.indexOf(true) == -1 || flixel_FlxG.save.data.botplay)) {
-			if(StringTools.startsWith(PlayState.boyfriend.animation._curAnim.name,"sing") && !StringTools.endsWith(PlayState.boyfriend.animation._curAnim.name,"miss")) {
+			if(PlayState.boyfriend.animation._curAnim != null && StringTools.startsWith(PlayState.boyfriend.animation._curAnim.name,"sing") && !StringTools.endsWith(PlayState.boyfriend.animation._curAnim.name,"miss")) {
 				PlayState.boyfriend.playAnim("idle");
 			}
 		}
 		PlayState.playerStrums.forEach(function(spr) {
-			if(pressArray[spr.ID] && spr.animation._curAnim.name != "confirm") {
+			if(pressArray[spr.ID] && spr.animation._curAnim != null && spr.animation._curAnim.name != "confirm") {
 				spr.animation.play("pressed");
 			}
 			if(!holdArray[spr.ID]) {
@@ -108703,7 +108703,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 183009;
+	this.version = 913261;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
