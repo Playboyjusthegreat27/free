@@ -8116,6 +8116,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 	,danced: null
 	,dance: function() {
 		if(!this.debugMode) {
+			var currentAnim = this.animation._curAnim;
 			switch(this.curCharacter) {
 			case "gf":
 				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
@@ -108701,7 +108702,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 193368;
+	this.version = 379313;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
