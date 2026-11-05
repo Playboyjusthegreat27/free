@@ -13482,7 +13482,7 @@ var DialogueBox = function(talkingRight,dialogueList) {
 	flixel_group_FlxTypedSpriteGroup.call(this);
 	switch(PlayState.SONG.song.toLowerCase()) {
 	case "senpai":
-		flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "Lunchbox" + "." + "ogg","MUSIC",null),0);
+		flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "Lunchbox" + "." + "mp3","MUSIC",null),0);
 		var _this = flixel_FlxG.sound.music;
 		var Duration = 1;
 		var From = 0;
@@ -13505,7 +13505,7 @@ var DialogueBox = function(talkingRight,dialogueList) {
 		_this.fadeTween = flixel_tweens_FlxTween.num(From,To,Duration,{ onComplete : null},$bind(_this,_this.volumeTween));
 		break;
 	case "thorns":
-		flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "LunchboxScary" + "." + "ogg","MUSIC",null),0);
+		flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "LunchboxScary" + "." + "mp3","MUSIC",null),0);
 		var _this = flixel_FlxG.sound.music;
 		var Duration = 1;
 		var From = 0;
@@ -14324,7 +14324,7 @@ GameOverSubstate.prototype = $extend(MusicBeatSubstate.prototype,{
 				flixel_FlxG.camera.follow(this.camFollow,flixel_FlxCameraFollowStyle.LOCKON,0.01);
 			}
 			if(this.bf.animation._curAnim.name == "firstDeath" && this.bf.animation._curAnim.finished) {
-				flixel_FlxG.sound.playMusic(Paths.getPath("music/" + ("gameOver" + this.stageSuffix) + "." + "ogg","MUSIC",null));
+				flixel_FlxG.sound.playMusic(Paths.getPath("music/" + ("gameOver" + this.stageSuffix) + "." + "mp3","MUSIC",null));
 			}
 		} else {
 			flixel_FlxG.camera.follow(this.camFollow,flixel_FlxCameraFollowStyle.LOCKON);
@@ -14345,7 +14345,7 @@ GameOverSubstate.prototype = $extend(MusicBeatSubstate.prototype,{
 			}
 			var _this = flixel_FlxG.sound.music;
 			_this.cleanup(_this.autoDestroy,true);
-			flixel_FlxG.sound.play(Paths.getPath("music/" + ("gameOverEnd" + this.stageSuffix) + "." + "ogg","MUSIC",null));
+			flixel_FlxG.sound.play(Paths.getPath("music/" + ("gameOverEnd" + this.stageSuffix) + "." + "mp3","MUSIC",null));
 			new flixel_util_FlxTimer().start(0.7,function(tmr) {
 				flixel_FlxG.camera.fade(-16777216,2,false,function() {
 					var nextState = LoadingState.getNextState(new PlayState(),false);
@@ -15788,7 +15788,7 @@ MainMenuState.prototype = $extend(MusicBeatState.prototype,{
 	,create: function() {
 		var _gthis = this;
 		if(flixel_FlxG.sound.music._channel == null) {
-			flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "ogg","MUSIC",null));
+			flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "mp3","MUSIC",null));
 		}
 		this.persistentUpdate = this.persistentDraw = true;
 		var bg = new flixel_FlxSprite(-100).loadGraphic(Paths.getPath("images/" + "menuBG" + ".png","IMAGE",null));
@@ -15923,6 +15923,8 @@ MainMenuState.prototype = $extend(MusicBeatState.prototype,{
 		MusicBeatState.prototype.create.call(this);
 	}
 	,selectedSomethin: null
+	,playMenuSound: function(key) {
+	}
 	,update: function(elapsed) {
 		var _gthis = this;
 		if(flixel_FlxG.sound.music._volume < 0.8) {
@@ -15931,11 +15933,11 @@ MainMenuState.prototype = $extend(MusicBeatState.prototype,{
 		}
 		if(!this.selectedSomethin) {
 			if(PlayerSettings.player1.controls._upP.check()) {
-				flixel_FlxG.sound.play(Paths.sound("scrollMenu"));
+				this.playMenuSound("scrollMenu");
 				this.changeItem(-1);
 			}
 			if(PlayerSettings.player1.controls._downP.check()) {
-				flixel_FlxG.sound.play(Paths.sound("scrollMenu"));
+				this.playMenuSound("scrollMenu");
 				this.changeItem(1);
 			}
 			if(PlayerSettings.player1.controls._back.check()) {
@@ -15949,7 +15951,7 @@ MainMenuState.prototype = $extend(MusicBeatState.prototype,{
 					this.fancyOpenURL("https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game");
 				} else {
 					this.selectedSomethin = true;
-					flixel_FlxG.sound.play(Paths.sound("confirmMenu"));
+					this.playMenuSound("confirmMenu");
 					if(flixel_FlxG.save.data.flashing) {
 						flixel_effects_FlxFlicker.flicker(this.magenta,1.1,0.15,false);
 					}
@@ -16009,7 +16011,7 @@ MainMenuState.prototype = $extend(MusicBeatState.prototype,{
 			if(flixel_FlxG.game._state.switchTo(nextState)) {
 				flixel_FlxG.game._requestedState = nextState;
 			}
-			haxe_Log.trace("Freeplay Menu Selected",{ fileName : "source/MainMenuState.hx", lineNumber : 232, className : "MainMenuState", methodName : "goToState"});
+			haxe_Log.trace("Freeplay Menu Selected",{ fileName : "source/MainMenuState.hx", lineNumber : 239, className : "MainMenuState", methodName : "goToState"});
 			break;
 		case "options":
 			var nextState = new OptionsMenu();
@@ -16022,7 +16024,7 @@ MainMenuState.prototype = $extend(MusicBeatState.prototype,{
 			if(flixel_FlxG.game._state.switchTo(nextState)) {
 				flixel_FlxG.game._requestedState = nextState;
 			}
-			haxe_Log.trace("Story Menu Selected",{ fileName : "source/MainMenuState.hx", lineNumber : 228, className : "MainMenuState", methodName : "goToState"});
+			haxe_Log.trace("Story Menu Selected",{ fileName : "source/MainMenuState.hx", lineNumber : 235, className : "MainMenuState", methodName : "goToState"});
 			break;
 		}
 	}
@@ -16067,8 +16069,8 @@ ManifestResources.init = function(config) {
 	if(ManifestResources.rootPath == null) {
 		ManifestResources.rootPath = "./";
 	}
-	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$vcr_$ttf);
+	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
 	var bundle;
@@ -16090,7 +16092,7 @@ ManifestResources.init = function(config) {
 	lime_utils_Assets.libraryPaths.h["week5"] = v;
 	var v = ManifestResources.rootPath + "manifest/week6.json";
 	lime_utils_Assets.libraryPaths.h["week6"] = v;
-	var data = "{\"name\":null,\"assets\":\"aoy4:sizei17762y4:typey5:MUSICy2:idy32:assets%2Fsounds%2FscrollMenu.mp3y9:pathGroupaR4hy7:preloadtgoR0i17762R1R2R3y32:assets%2Fsounds%2FcancelMenu.mp3R5aR7hR6tgoR0i91950R1R2R3y33:assets%2Fsounds%2FconfirmMenu.mp3R5aR8hR6tgoy4:pathy49:assets%2Fimages%2Fcampaign_menu_UI_characters.xmlR0i22475R1y4:TEXTR3R10R6tgoR9y26:assets%2Fimages%2Fnum4.pngR0i3989R1y5:IMAGER3R12R6tgoR9y36:assets%2Fimages%2FKadeEngineLogo.pngR0i104589R1R13R3R14R6tgoR9y37:assets%2Fimages%2Fnewgrounds_logo.pngR0i55820R1R13R3R15R6tgoR9y32:assets%2Fimages%2FlogoBumpin.xmlR0i2343R1R11R3R16R6tgoR9y26:assets%2Fimages%2Fnum7.pngR0i3692R1R13R3R17R6tgoR9y26:assets%2Fimages%2Fnum3.pngR0i4022R1R13R3R18R6tgoR9y32:assets%2Fimages%2FtitleEnter.xmlR0i4875R1R11R3R19R6tgoR9y32:assets%2Fimages%2FlogoBumpin.pngR0i1494120R1R13R3R20R6tgoR9y42:assets%2Fimages%2FFNF_main_menu_assets.pngR0i281298R1R13R3R21R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek1.pngR0i6261R1R13R3R22R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek3.pngR0i7148R1R13R3R23R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek2.pngR0i6517R1R13R3R24R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek0.pngR0i7056R1R13R3R25R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek5.pngR0i6440R1R13R3R26R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek6.pngR0i6998R1R13R3R27R6tgoR9y39:assets%2Fimages%2Fstorymenu%2Fweek4.pngR0i6262R1R13R3R28R6tgoR9y35:assets%2Fimages%2FmenuBGMagenta.pngR0i553468R1R13R3R29R6tgoR9y26:assets%2Fimages%2Fnum1.pngR0i3390R1R13R3R30R6tgoR9y32:assets%2Fimages%2FmenuBGBlue.pngR0i614586R1R13R3R31R6tgoR9y31:assets%2Fimages%2FmenuDesat.pngR0i357911R1R13R3R32R6tgoR9y26:assets%2Fimages%2Fnum0.pngR0i3738R1R13R3R33R6tgoR9y32:assets%2Fimages%2FtitleEnter.pngR0i1393264R1R13R3R34R6tgoR9y26:assets%2Fimages%2Fnum2.pngR0i3990R1R13R3R35R6tgoR9y26:assets%2Fimages%2Fnum5.pngR0i4113R1R13R3R36R6tgoR9y26:assets%2Fimages%2Fnum6.pngR0i4181R1R13R3R37R6tgoR9y49:assets%2Fimages%2Fcampaign_menu_UI_characters.pngR0i2285826R1R13R3R38R6tgoR9y26:assets%2Fimages%2Flogo.pngR0i86924R1R13R3R39R6tgoR9y42:assets%2Fimages%2FFNF_main_menu_assets.xmlR0i4755R1R11R3R40R6tgoR9y30:assets%2Fimages%2Falphabet.xmlR0i42406R1R11R3R41R6tgoR9y30:assets%2Fimages%2Falphabet.pngR0i133325R1R13R3R42R6tgoR9y45:assets%2Fimages%2Fcampaign_menu_UI_assets.xmlR0i1893R1R11R3R43R6tgoR9y26:assets%2Fimages%2Fnum9.pngR0i3687R1R13R3R44R6tgoR9y28:assets%2Fimages%2FmenuBG.pngR0i620342R1R13R3R45R6tgoR9y34:assets%2Fimages%2FgfDanceTitle.xmlR0i4252R1R11R3R46R6tgoR9y34:assets%2Fimages%2FgfDanceTitle.pngR0i1178768R1R13R3R47R6tgoR9y45:assets%2Fimages%2Fcampaign_menu_UI_assets.pngR0i27171R1R13R3R48R6tgoR9y26:assets%2Fimages%2Fnum8.pngR0i3914R1R13R3R49R6tgoR9y30:assets%2Fimages%2FiconGrid.pngR0i231543R1R13R3R50R6tgoR0i2309657R1R2R3y31:assets%2Fmusic%2FfreakyMenu.mp3R5aR51hR6tgoR9y33:assets%2Fdata%2FcharacterList.txtR0i178R1R11R3R52R6tgoR9y39:assets%2Fdata%2Fspooky-fight%2F0.offsetR0zR1R11R3R53R6tgoR9y53:assets%2Fdata%2Fspooky-fight%2Fspooky-fight-hard.jsonR0i10231R1R11R3R54R6tgoR9y48:assets%2Fdata%2Fspooky-fight%2Fspooky-fight.jsonR0i10231R1R11R3R55R6tgoR9y53:assets%2Fdata%2Fspooky-fight%2Fspooky-fight-easy.jsonR0i10231R1R11R3R56R6tgoR9y33:assets%2Fdata%2Fslurry%2F0.offsetR0zR1R11R3R57R6tgoR9y41:assets%2Fdata%2Fslurry%2Fslurry-easy.jsonR0i15584R1R11R3R58R6tgoR9y36:assets%2Fdata%2Fslurry%2Fslurry.jsonR0i15891R1R11R3R59R6tgoR9y41:assets%2Fdata%2Fslurry%2Fslurry-hard.jsonR0i16331R1R11R3R60R6tgoR9y33:assets%2Fdata%2FspecialThanks.txtR0i300R1R11R3R61R6tgoR9y28:assets%2Fdata%2Fcontrols.txtR0i324R1R11R3R62R6tgoR9y34:assets%2Fdata%2Fecstacy%2F0.offsetR0zR1R11R3R63R6tgoR9y38:assets%2Fdata%2Fecstacy%2Fecstacy.jsonR0i14886R1R11R3R64R6tgoR9y43:assets%2Fdata%2Fecstacy%2Fecstacy-easy.jsonR0i14884R1R11R3R65R6tgoR9y43:assets%2Fdata%2Fecstacy%2Fecstacy-hard.jsonR0i14886R1R11R3R66R6tgoR9y33:assets%2Fdata%2FgfVersionList.txtR0i55R1R11R3R67R6tgoR9y33:assets%2Fdata%2Fcreepz%2F0.offsetR0zR1R11R3R68R6tgoR9y41:assets%2Fdata%2Fcreepz%2Fcreepz-easy.jsonR0i13030R1R11R3R69R6tgoR9y41:assets%2Fdata%2Fcreepz%2Fcreepz-hard.jsonR0i13030R1R11R3R70R6tgoR9y36:assets%2Fdata%2Fcreepz%2Fcreepz.jsonR0i13030R1R11R3R71R6tgoR9y33:assets%2Fdata%2FnoteStyleList.txtR0i12R1R11R3R72R6tgoR9y43:assets%2Fdata%2Fjoyride%2Fjoyride-hard.jsonR0i16099R1R11R3R73R6tgoR9y34:assets%2Fdata%2Fjoyride%2F0.offsetR0zR1R11R3R74R6tgoR9y38:assets%2Fdata%2Fjoyride%2Fjoyride.jsonR0i16222R1R11R3R75R6tgoR9y43:assets%2Fdata%2Fjoyride%2Fjoyride-easy.jsonR0i16222R1R11R3R76R6tgoR9y39:assets%2Fdata%2Fnight-lights%2F0.offsetR0zR1R11R3R77R6tgoR9y53:assets%2Fdata%2Fnight-lights%2Fnight-lights-easy.jsonR0i12021R1R11R3R78R6tgoR9y48:assets%2Fdata%2Fnight-lights%2Fnight-lights.jsonR0i12021R1R11R3R79R6tgoR9y53:assets%2Fdata%2Fnight-lights%2Fnight-lights-hard.jsonR0i12021R1R11R3R80R6tgoR9y29:assets%2Fdata%2Fmain-view.xmlR0i123R1R11R3R81R6tgoR9y47:assets%2Fdata%2Fsplinters%2Fsplinters-easy.jsonR0i23974R1R11R3R82R6tgoR9y36:assets%2Fdata%2Fsplinters%2F2.offsetR0zR1R11R3R83R6tgoR9y47:assets%2Fdata%2Fsplinters%2Fsplinters-hard.jsonR0i25781R1R11R3R84R6tgoR9y42:assets%2Fdata%2Fsplinters%2Fsplinters.jsonR0i25535R1R11R3R85R6tgoR9y29:assets%2Fdata%2FintroText.txtR0i300R1R11R3R86R6tgoR9y33:assets%2Fdata%2Fflurry%2F0.offsetR0zR1R11R3R87R6tgoR9y41:assets%2Fdata%2Fflurry%2Fflurry-easy.jsonR0i14702R1R11R3R88R6tgoR9y41:assets%2Fdata%2Fflurry%2Fflurry-hard.jsonR0i17156R1R11R3R89R6tgoR9y36:assets%2Fdata%2Fflurry%2Fflurry.jsonR0i15947R1R11R3R90R6tgoR9y36:assets%2Fdata%2Fnorth%2Fa%20note.txtR0i74R1R11R3R91R6tgoR9y34:assets%2Fdata%2Fnorth%2Fnorth.jsonR0i12288R1R11R3R92R6tgoR9y32:assets%2Fdata%2Fnorth%2F0.offsetR0zR1R11R3R93R6tgoR9y39:assets%2Fdata%2Fnorth%2Fnorth-hard.jsonR0i12288R1R11R3R94R6tgoR9y39:assets%2Fdata%2Fnorth%2Fnorth-easy.jsonR0i12288R1R11R3R95R6tgoR9y35:assets%2Fdata%2Fturf-war%2F0.offsetR0zR1R11R3R96R6tgoR9y40:assets%2Fdata%2Fturf-war%2Fturf-war.jsonR0i13702R1R11R3R97R6tgoR9y45:assets%2Fdata%2Fturf-war%2Fturf-war-easy.jsonR0i13702R1R11R3R98R6tgoR9y45:assets%2Fdata%2Fturf-war%2Fturf-war-hard.jsonR0i13702R1R11R3R99R6tgoR9y37:assets%2Fdata%2Ffunky-nice%2F0.offsetR0zR1R11R3R100R6tgoR9y49:assets%2Fdata%2Ffunky-nice%2Ffunky-nice-easy.jsonR0i13750R1R11R3R101R6tgoR9y44:assets%2Fdata%2Ffunky-nice%2Ffunky-nice.jsonR0i13750R1R11R3R102R6tgoR9y49:assets%2Fdata%2Ffunky-nice%2Ffunky-nice-hard.jsonR0i13750R1R11R3R103R6tgoR9y36:assets%2Fdata%2FfreeplaySonglist.txtR0i359R1R11R3R104R6tgoR9y41:assets%2Fdata%2Fcruise-control%2F0.offsetR0zR1R11R3R105R6tgoR9y57:assets%2Fdata%2Fcruise-control%2Fcruise-control-easy.jsonR0i13612R1R11R3R106R6tgoR9y52:assets%2Fdata%2Fcruise-control%2Fcruise-control.jsonR0i13612R1R11R3R107R6tgoR9y57:assets%2Fdata%2Fcruise-control%2Fcruise-control-hard.jsonR0i13612R1R11R3R108R6tgoR9y35:assets%2Fdata%2Fgunfight%2F0.offsetR0zR1R11R3R109R6tgoR9y40:assets%2Fdata%2Fgunfight%2Fgunfight.jsonR0i12274R1R11R3R110R6tgoR9y45:assets%2Fdata%2Fgunfight%2Fgunfight-hard.jsonR0i12274R1R11R3R111R6tgoR9y45:assets%2Fdata%2Fgunfight%2Fgunfight-easy.jsonR0i12274R1R11R3R112R6tgoR9y33:assets%2Fdata%2Frecess%2F0.offsetR0zR1R11R3R113R6tgoR9y41:assets%2Fdata%2Frecess%2Frecess-hard.jsonR0i14968R1R11R3R114R6tgoR9y36:assets%2Fdata%2Frecess%2Frecess.jsonR0i15089R1R11R3R115R6tgoR9y41:assets%2Fdata%2Frecess%2Frecess-easy.jsonR0i15091R1R11R3R116R6tgoR9y36:assets%2Fdata%2Frefreshed%2F0.offsetR0zR1R11R3R117R6tgoR9y47:assets%2Fdata%2Frefreshed%2Frefreshed-hard.jsonR0i10073R1R11R3R118R6tgoR9y42:assets%2Fdata%2Frefreshed%2Frefreshed.jsonR0i10073R1R11R3R119R6tgoR9y47:assets%2Fdata%2Frefreshed%2Frefreshed-easy.jsonR0i10073R1R11R3R120R6tgoR9y34:assets%2Fdata%2Fdata-goes-here.txtR0zR1R11R3R121R6tgoR9y29:assets%2Fdata%2FstageList.txtR0i59R1R11R3R122R6tgoR9y36:assets%2Fdata%2Fsnowblind%2F0.offsetR0zR1R11R3R123R6tgoR9y42:assets%2Fdata%2Fsnowblind%2Fsnowblind.jsonR0i13285R1R11R3R124R6tgoR9y47:assets%2Fdata%2Fsnowblind%2Fsnowblind-easy.jsonR0i13085R1R11R3R125R6tgoR9y47:assets%2Fdata%2Fsnowblind%2Fsnowblind-hard.jsonR0i13626R1R11R3R126R6tgoR9y41:assets%2Fdata%2Fsocial-suicide%2F0.offsetR0zR1R11R3R127R6tgoR9y52:assets%2Fdata%2Fsocial-suicide%2Fsocial-suicide.jsonR0i15134R1R11R3R128R6tgoR9y57:assets%2Fdata%2Fsocial-suicide%2Fsocial-suicide-easy.jsonR0i15255R1R11R3R129R6tgoR9y57:assets%2Fdata%2Fsocial-suicide%2Fsocial-suicide-hard.jsonR0i15255R1R11R3R130R6tgoR9y33:assets%2Fdata%2Fdoobop%2F0.offsetR0zR1R11R3R131R6tgoR9y41:assets%2Fdata%2Fdoobop%2Fdoobop-hard.jsonR0i7980R1R11R3R132R6tgoR9y36:assets%2Fdata%2Fdoobop%2Fdoobop.jsonR0i7980R1R11R3R133R6tgoR9y41:assets%2Fdata%2Fdoobop%2Fdoobop-easy.jsonR0i7943R1R11R3R134R6tgoR9y48:mods%2FintroMod%2F_append%2Fdata%2FintroText.txtR0i20R1R11R3R135goR9y18:mods%2FmodList.txtR0i8R1R11R3R136goR9y17:mods%2Freadme.txtR0i90R1R11R3R137goR9y21:do%20NOT%20readme.txtR0i4326R1R11R3R138R6tgoR9y11:LICENSE.txtR0i11407R1R11R3R139R6tgoR9y34:assets%2Ffonts%2Ffonts-go-here.txtR0zR1R11R3R140R6tgoR0i14656R1y4:FONTy9:classNamey31:__ASSET__assets_fonts_pixel_otfR3y26:assets%2Ffonts%2Fpixel.otfR6tgoR0i75864R1R141R142y29:__ASSET__assets_fonts_vcr_ttfR3y24:assets%2Ffonts%2Fvcr.ttfR6tgoR0i2114R1R2R3y26:flixel%2Fsounds%2Fbeep.mp3R5aR147y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR0i39706R1R2R3y28:flixel%2Fsounds%2Fflixel.mp3R5aR149y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR0i5794R1y5:SOUNDR3R148R5aR147R148hgoR0i33629R1R151R3R150R5aR149R150hgoR0i15744R1R141R142y35:__ASSET__flixel_fonts_nokiafc22_ttfR3y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR0i29724R1R141R142y36:__ASSET__flixel_fonts_monsterrat_ttfR3y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR9y33:flixel%2Fimages%2Fui%2Fbutton.pngR0i519R1R13R3R156R6tgoR9y36:flixel%2Fimages%2Flogo%2Fdefault.pngR0i3280R1R13R3R157R6tgoR9y42:flixel%2Fflixel-ui%2Fimg%2Fchrome_flat.pngR0i212R1R13R3R158R6tgoR9y40:flixel%2Fflixel-ui%2Fimg%2Fplus_mark.pngR0i147R1R13R3R159R6tgoR9y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_light.pngR0i214R1R13R3R160R6tgoR9y43:flixel%2Fflixel-ui%2Fimg%2Ffinger_small.pngR0i294R1R13R3R161R6tgoR9y36:flixel%2Fflixel-ui%2Fimg%2Finvis.pngR0i128R1R13R3R162R6tgoR9y44:flixel%2Fflixel-ui%2Fimg%2Fbutton_toggle.pngR0i534R1R13R3R163R6tgoR9y40:flixel%2Fflixel-ui%2Fimg%2Fcheck_box.pngR0i922R1R13R3R164R6tgoR9y41:flixel%2Fflixel-ui%2Fimg%2Ffinger_big.pngR0i1724R1R13R3R165R6tgoR9y40:flixel%2Fflixel-ui%2Fimg%2Fradio_dot.pngR0i153R1R13R3R166R6tgoR9y39:flixel%2Fflixel-ui%2Fimg%2Ftab_back.pngR0i210R1R13R3R167R6tgoR9y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_inset.pngR0i192R1R13R3R168R6tgoR9y44:flixel%2Fflixel-ui%2Fimg%2Ftooltip_arrow.pngR0i18509R1R13R3R169R6tgoR9y44:flixel%2Fflixel-ui%2Fimg%2Fdropdown_mark.pngR0i156R1R13R3R170R6tgoR9y37:flixel%2Fflixel-ui%2Fimg%2Fbutton.pngR0i433R1R13R3R171R6tgoR9y34:flixel%2Fflixel-ui%2Fimg%2Fbox.pngR0i912R1R13R3R172R6tgoR9y46:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_up.pngR0i493R1R13R3R173R6tgoR9y41:flixel%2Fflixel-ui%2Fimg%2Fcheck_mark.pngR0i946R1R13R3R174R6tgoR9y37:flixel%2Fflixel-ui%2Fimg%2Fswatch.pngR0i185R1R13R3R175R6tgoR9y34:flixel%2Fflixel-ui%2Fimg%2Ftab.pngR0i201R1R13R3R176R6tgoR9y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_left.pngR0i459R1R13R3R177R6tgoR9y49:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_right.pngR0i511R1R13R3R178R6tgoR9y41:flixel%2Fflixel-ui%2Fimg%2Fminus_mark.pngR0i136R1R13R3R179R6tgoR9y37:flixel%2Fflixel-ui%2Fimg%2Fchrome.pngR0i253R1R13R3R180R6tgoR9y38:flixel%2Fflixel-ui%2Fimg%2Fhilight.pngR0i129R1R13R3R181R6tgoR9y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_down.pngR0i446R1R13R3R182R6tgoR9y42:flixel%2Fflixel-ui%2Fimg%2Fbutton_thin.pngR0i247R1R13R3R183R6tgoR9y36:flixel%2Fflixel-ui%2Fimg%2Fradio.pngR0i191R1R13R3R184R6tgoR9y44:flixel%2Fflixel-ui%2Fxml%2Fdefault_popup.xmlR0i1848R1R11R3R185R6tgoR9y39:flixel%2Fflixel-ui%2Fxml%2Fdefaults.xmlR0i1263R1R11R3R186R6tgoR9y53:flixel%2Fflixel-ui%2Fxml%2Fdefault_loading_screen.xmlR0i1953R1R11R3R187R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	var data = "{\"name\":null,\"assets\":\"aoy4:pathy32:assets%2Fimages%2FlogoBumpin.xmly4:sizei2343y4:typey4:TEXTy2:idR1y7:preloadtgoR0y26:assets%2Fimages%2Fnum8.pngR2i3914R3y5:IMAGER5R7R6tgoR0y26:assets%2Fimages%2Fnum2.pngR2i3990R3R8R5R9R6tgoR0y26:assets%2Fimages%2Fnum4.pngR2i3989R3R8R5R10R6tgoR0y34:assets%2Fimages%2FgfDanceTitle.pngR2i1178768R3R8R5R11R6tgoR0y30:assets%2Fimages%2FiconGrid.pngR2i231543R3R8R5R12R6tgoR0y49:assets%2Fimages%2Fcampaign_menu_UI_characters.xmlR2i22475R3R4R5R13R6tgoR0y49:assets%2Fimages%2Fcampaign_menu_UI_characters.pngR2i2285826R3R8R5R14R6tgoR0y30:assets%2Fimages%2Falphabet.xmlR2i42406R3R4R5R15R6tgoR0y32:assets%2Fimages%2FlogoBumpin.pngR2i1494120R3R8R5R16R6tgoR0y45:assets%2Fimages%2Fcampaign_menu_UI_assets.pngR2i27171R3R8R5R17R6tgoR0y28:assets%2Fimages%2FmenuBG.pngR2i620342R3R8R5R18R6tgoR0y34:assets%2Fimages%2FgfDanceTitle.xmlR2i4252R3R4R5R19R6tgoR0y26:assets%2Fimages%2Fnum0.pngR2i3738R3R8R5R20R6tgoR0y30:assets%2Fimages%2Falphabet.pngR2i133325R3R8R5R21R6tgoR0y32:assets%2Fimages%2FmenuBGBlue.pngR2i614586R3R8R5R22R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek3.pngR2i7148R3R8R5R23R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek0.pngR2i7056R3R8R5R24R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek1.pngR2i6261R3R8R5R25R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek4.pngR2i6262R3R8R5R26R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek6.pngR2i6998R3R8R5R27R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek5.pngR2i6440R3R8R5R28R6tgoR0y39:assets%2Fimages%2Fstorymenu%2Fweek2.pngR2i6517R3R8R5R29R6tgoR0y32:assets%2Fimages%2FtitleEnter.xmlR2i4875R3R4R5R30R6tgoR0y26:assets%2Fimages%2Fnum3.pngR2i4022R3R8R5R31R6tgoR0y26:assets%2Fimages%2Fnum9.pngR2i3687R3R8R5R32R6tgoR0y26:assets%2Fimages%2Flogo.pngR2i86924R3R8R5R33R6tgoR0y42:assets%2Fimages%2FFNF_main_menu_assets.pngR2i281298R3R8R5R34R6tgoR0y26:assets%2Fimages%2Fnum7.pngR2i3692R3R8R5R35R6tgoR0y35:assets%2Fimages%2FmenuBGMagenta.pngR2i553468R3R8R5R36R6tgoR0y26:assets%2Fimages%2Fnum5.pngR2i4113R3R8R5R37R6tgoR0y31:assets%2Fimages%2FmenuDesat.pngR2i357911R3R8R5R38R6tgoR0y37:assets%2Fimages%2Fnewgrounds_logo.pngR2i55820R3R8R5R39R6tgoR0y36:assets%2Fimages%2FKadeEngineLogo.pngR2i104589R3R8R5R40R6tgoR0y26:assets%2Fimages%2Fnum6.pngR2i4181R3R8R5R41R6tgoR0y42:assets%2Fimages%2FFNF_main_menu_assets.xmlR2i4755R3R4R5R42R6tgoR0y45:assets%2Fimages%2Fcampaign_menu_UI_assets.xmlR2i1893R3R4R5R43R6tgoR0y32:assets%2Fimages%2FtitleEnter.pngR2i1393264R3R8R5R44R6tgoR0y26:assets%2Fimages%2Fnum1.pngR2i3390R3R8R5R45R6tgoR0y47:assets%2Fdata%2Fsplinters%2Fsplinters-hard.jsonR2i25781R3R4R5R46R6tgoR0y47:assets%2Fdata%2Fsplinters%2Fsplinters-easy.jsonR2i23974R3R4R5R47R6tgoR0y42:assets%2Fdata%2Fsplinters%2Fsplinters.jsonR2i25535R3R4R5R48R6tgoR0y36:assets%2Fdata%2Fsplinters%2F2.offsetR2zR3R4R5R49R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R50R6tgoR0y33:assets%2Fdata%2Fslurry%2F0.offsetR2zR3R4R5R51R6tgoR0y36:assets%2Fdata%2Fslurry%2Fslurry.jsonR2i15891R3R4R5R52R6tgoR0y41:assets%2Fdata%2Fslurry%2Fslurry-hard.jsonR2i16331R3R4R5R53R6tgoR0y41:assets%2Fdata%2Fslurry%2Fslurry-easy.jsonR2i15584R3R4R5R54R6tgoR0y33:assets%2Fdata%2Fflurry%2F0.offsetR2zR3R4R5R55R6tgoR0y41:assets%2Fdata%2Fflurry%2Fflurry-easy.jsonR2i14702R3R4R5R56R6tgoR0y41:assets%2Fdata%2Fflurry%2Fflurry-hard.jsonR2i17156R3R4R5R57R6tgoR0y36:assets%2Fdata%2Fflurry%2Fflurry.jsonR2i15947R3R4R5R58R6tgoR0y33:assets%2Fdata%2Fcreepz%2F0.offsetR2zR3R4R5R59R6tgoR0y36:assets%2Fdata%2Fcreepz%2Fcreepz.jsonR2i13030R3R4R5R60R6tgoR0y41:assets%2Fdata%2Fcreepz%2Fcreepz-easy.jsonR2i13030R3R4R5R61R6tgoR0y41:assets%2Fdata%2Fcreepz%2Fcreepz-hard.jsonR2i13030R3R4R5R62R6tgoR0y36:assets%2Fdata%2Frefreshed%2F0.offsetR2zR3R4R5R63R6tgoR0y47:assets%2Fdata%2Frefreshed%2Frefreshed-hard.jsonR2i10073R3R4R5R64R6tgoR0y42:assets%2Fdata%2Frefreshed%2Frefreshed.jsonR2i10073R3R4R5R65R6tgoR0y47:assets%2Fdata%2Frefreshed%2Frefreshed-easy.jsonR2i10073R3R4R5R66R6tgoR0y33:assets%2Fdata%2FspecialThanks.txtR2i300R3R4R5R67R6tgoR0y41:assets%2Fdata%2Fsocial-suicide%2F0.offsetR2zR3R4R5R68R6tgoR0y57:assets%2Fdata%2Fsocial-suicide%2Fsocial-suicide-hard.jsonR2i15255R3R4R5R69R6tgoR0y57:assets%2Fdata%2Fsocial-suicide%2Fsocial-suicide-easy.jsonR2i15255R3R4R5R70R6tgoR0y52:assets%2Fdata%2Fsocial-suicide%2Fsocial-suicide.jsonR2i15134R3R4R5R71R6tgoR0y38:assets%2Fdata%2Fecstacy%2Fecstacy.jsonR2i14886R3R4R5R72R6tgoR0y34:assets%2Fdata%2Fecstacy%2F0.offsetR2zR3R4R5R73R6tgoR0y43:assets%2Fdata%2Fecstacy%2Fecstacy-easy.jsonR2i14884R3R4R5R74R6tgoR0y43:assets%2Fdata%2Fecstacy%2Fecstacy-hard.jsonR2i14886R3R4R5R75R6tgoR0y29:assets%2Fdata%2FstageList.txtR2i59R3R4R5R76R6tgoR0y41:assets%2Fdata%2Fcruise-control%2F0.offsetR2zR3R4R5R77R6tgoR0y52:assets%2Fdata%2Fcruise-control%2Fcruise-control.jsonR2i13612R3R4R5R78R6tgoR0y57:assets%2Fdata%2Fcruise-control%2Fcruise-control-hard.jsonR2i13612R3R4R5R79R6tgoR0y57:assets%2Fdata%2Fcruise-control%2Fcruise-control-easy.jsonR2i13612R3R4R5R80R6tgoR0y33:assets%2Fdata%2Fdoobop%2F0.offsetR2zR3R4R5R81R6tgoR0y41:assets%2Fdata%2Fdoobop%2Fdoobop-easy.jsonR2i7943R3R4R5R82R6tgoR0y41:assets%2Fdata%2Fdoobop%2Fdoobop-hard.jsonR2i7980R3R4R5R83R6tgoR0y36:assets%2Fdata%2Fdoobop%2Fdoobop.jsonR2i7980R3R4R5R84R6tgoR0y34:assets%2Fdata%2Fjoyride%2F0.offsetR2zR3R4R5R85R6tgoR0y38:assets%2Fdata%2Fjoyride%2Fjoyride.jsonR2i16222R3R4R5R86R6tgoR0y43:assets%2Fdata%2Fjoyride%2Fjoyride-hard.jsonR2i16099R3R4R5R87R6tgoR0y43:assets%2Fdata%2Fjoyride%2Fjoyride-easy.jsonR2i16222R3R4R5R88R6tgoR0y32:assets%2Fdata%2Fnorth%2F0.offsetR2zR3R4R5R89R6tgoR0y39:assets%2Fdata%2Fnorth%2Fnorth-hard.jsonR2i12288R3R4R5R90R6tgoR0y36:assets%2Fdata%2Fnorth%2Fa%20note.txtR2i74R3R4R5R91R6tgoR0y34:assets%2Fdata%2Fnorth%2Fnorth.jsonR2i12288R3R4R5R92R6tgoR0y39:assets%2Fdata%2Fnorth%2Fnorth-easy.jsonR2i12288R3R4R5R93R6tgoR0y39:assets%2Fdata%2Fnight-lights%2F0.offsetR2zR3R4R5R94R6tgoR0y53:assets%2Fdata%2Fnight-lights%2Fnight-lights-hard.jsonR2i12021R3R4R5R95R6tgoR0y48:assets%2Fdata%2Fnight-lights%2Fnight-lights.jsonR2i12021R3R4R5R96R6tgoR0y53:assets%2Fdata%2Fnight-lights%2Fnight-lights-easy.jsonR2i12021R3R4R5R97R6tgoR0y33:assets%2Fdata%2FcharacterList.txtR2i178R3R4R5R98R6tgoR0y33:assets%2Fdata%2FnoteStyleList.txtR2i12R3R4R5R99R6tgoR0y39:assets%2Fdata%2Fspooky-fight%2F0.offsetR2zR3R4R5R100R6tgoR0y53:assets%2Fdata%2Fspooky-fight%2Fspooky-fight-easy.jsonR2i10231R3R4R5R101R6tgoR0y48:assets%2Fdata%2Fspooky-fight%2Fspooky-fight.jsonR2i10231R3R4R5R102R6tgoR0y53:assets%2Fdata%2Fspooky-fight%2Fspooky-fight-hard.jsonR2i10231R3R4R5R103R6tgoR0y29:assets%2Fdata%2Fmain-view.xmlR2i123R3R4R5R104R6tgoR0y35:assets%2Fdata%2Fgunfight%2F0.offsetR2zR3R4R5R105R6tgoR0y40:assets%2Fdata%2Fgunfight%2Fgunfight.jsonR2i12274R3R4R5R106R6tgoR0y45:assets%2Fdata%2Fgunfight%2Fgunfight-hard.jsonR2i12274R3R4R5R107R6tgoR0y45:assets%2Fdata%2Fgunfight%2Fgunfight-easy.jsonR2i12274R3R4R5R108R6tgoR0y29:assets%2Fdata%2FintroText.txtR2i300R3R4R5R109R6tgoR0y36:assets%2Fdata%2FfreeplaySonglist.txtR2i359R3R4R5R110R6tgoR0y28:assets%2Fdata%2Fcontrols.txtR2i324R3R4R5R111R6tgoR0y37:assets%2Fdata%2Ffunky-nice%2F0.offsetR2zR3R4R5R112R6tgoR0y49:assets%2Fdata%2Ffunky-nice%2Ffunky-nice-hard.jsonR2i13750R3R4R5R113R6tgoR0y44:assets%2Fdata%2Ffunky-nice%2Ffunky-nice.jsonR2i13750R3R4R5R114R6tgoR0y49:assets%2Fdata%2Ffunky-nice%2Ffunky-nice-easy.jsonR2i13750R3R4R5R115R6tgoR0y35:assets%2Fdata%2Fturf-war%2F0.offsetR2zR3R4R5R116R6tgoR0y45:assets%2Fdata%2Fturf-war%2Fturf-war-easy.jsonR2i13702R3R4R5R117R6tgoR0y40:assets%2Fdata%2Fturf-war%2Fturf-war.jsonR2i13702R3R4R5R118R6tgoR0y45:assets%2Fdata%2Fturf-war%2Fturf-war-hard.jsonR2i13702R3R4R5R119R6tgoR0y33:assets%2Fdata%2FgfVersionList.txtR2i55R3R4R5R120R6tgoR0y36:assets%2Fdata%2Fsnowblind%2F0.offsetR2zR3R4R5R121R6tgoR0y42:assets%2Fdata%2Fsnowblind%2Fsnowblind.jsonR2i13285R3R4R5R122R6tgoR0y47:assets%2Fdata%2Fsnowblind%2Fsnowblind-easy.jsonR2i13085R3R4R5R123R6tgoR0y47:assets%2Fdata%2Fsnowblind%2Fsnowblind-hard.jsonR2i13626R3R4R5R124R6tgoR0y33:assets%2Fdata%2Frecess%2F0.offsetR2zR3R4R5R125R6tgoR0y41:assets%2Fdata%2Frecess%2Frecess-hard.jsonR2i14968R3R4R5R126R6tgoR0y41:assets%2Fdata%2Frecess%2Frecess-easy.jsonR2i15091R3R4R5R127R6tgoR0y36:assets%2Fdata%2Frecess%2Frecess.jsonR2i15089R3R4R5R128R6tgoR2i2309657R3y5:MUSICR5y31:assets%2Fmusic%2FfreakyMenu.mp3y9:pathGroupaR130hR6tgoR2i17762R3R129R5y32:assets%2Fsounds%2FcancelMenu.mp3R131aR132hR6tgoR2i17762R3R129R5y32:assets%2Fsounds%2FscrollMenu.mp3R131aR133hR6tgoR2i91950R3R129R5y33:assets%2Fsounds%2FconfirmMenu.mp3R131aR134hR6tgoR0y48:mods%2FintroMod%2F_append%2Fdata%2FintroText.txtR2i20R3R4R5R135goR0y18:mods%2FmodList.txtR2i8R3R4R5R136goR0y17:mods%2Freadme.txtR2i90R3R4R5R137goR0y21:do%20NOT%20readme.txtR2i4326R3R4R5R138R6tgoR0y11:LICENSE.txtR2i11407R3R4R5R139R6tgoR2i75864R3y4:FONTy9:classNamey29:__ASSET__assets_fonts_vcr_ttfR5y24:assets%2Ffonts%2Fvcr.ttfR6tgoR2i14656R3R140R141y31:__ASSET__assets_fonts_pixel_otfR5y26:assets%2Ffonts%2Fpixel.otfR6tgoR0y34:assets%2Ffonts%2Ffonts-go-here.txtR2zR3R4R5R146R6tgoR2i39706R3R129R5y28:flixel%2Fsounds%2Fflixel.mp3R131aR147y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R129R5y26:flixel%2Fsounds%2Fbeep.mp3R131aR149y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i33629R3y5:SOUNDR5R148R131aR147R148hgoR2i5794R3R151R5R150R131aR149R150hgoR2i15744R3R140R141y35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R140R141y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R156R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R157R6tgoR0y40:flixel%2Fflixel-ui%2Fimg%2Fplus_mark.pngR2i147R3R8R5R158R6tgoR0y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_down.pngR2i446R3R8R5R159R6tgoR0y34:flixel%2Fflixel-ui%2Fimg%2Fbox.pngR2i912R3R8R5R160R6tgoR0y41:flixel%2Fflixel-ui%2Fimg%2Fcheck_mark.pngR2i946R3R8R5R161R6tgoR0y44:flixel%2Fflixel-ui%2Fimg%2Fdropdown_mark.pngR2i156R3R8R5R162R6tgoR0y39:flixel%2Fflixel-ui%2Fimg%2Ftab_back.pngR2i210R3R8R5R163R6tgoR0y44:flixel%2Fflixel-ui%2Fimg%2Ftooltip_arrow.pngR2i18509R3R8R5R164R6tgoR0y36:flixel%2Fflixel-ui%2Fimg%2Fradio.pngR2i191R3R8R5R165R6tgoR0y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_inset.pngR2i192R3R8R5R166R6tgoR0y37:flixel%2Fflixel-ui%2Fimg%2Fbutton.pngR2i433R3R8R5R167R6tgoR0y40:flixel%2Fflixel-ui%2Fimg%2Fradio_dot.pngR2i153R3R8R5R168R6tgoR0y42:flixel%2Fflixel-ui%2Fimg%2Fchrome_flat.pngR2i212R3R8R5R169R6tgoR0y40:flixel%2Fflixel-ui%2Fimg%2Fcheck_box.pngR2i922R3R8R5R170R6tgoR0y38:flixel%2Fflixel-ui%2Fimg%2Fhilight.pngR2i129R3R8R5R171R6tgoR0y41:flixel%2Fflixel-ui%2Fimg%2Fminus_mark.pngR2i136R3R8R5R172R6tgoR0y48:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_left.pngR2i459R3R8R5R173R6tgoR0y42:flixel%2Fflixel-ui%2Fimg%2Fbutton_thin.pngR2i247R3R8R5R174R6tgoR0y37:flixel%2Fflixel-ui%2Fimg%2Fswatch.pngR2i185R3R8R5R175R6tgoR0y43:flixel%2Fflixel-ui%2Fimg%2Ffinger_small.pngR2i294R3R8R5R176R6tgoR0y36:flixel%2Fflixel-ui%2Fimg%2Finvis.pngR2i128R3R8R5R177R6tgoR0y34:flixel%2Fflixel-ui%2Fimg%2Ftab.pngR2i201R3R8R5R178R6tgoR0y37:flixel%2Fflixel-ui%2Fimg%2Fchrome.pngR2i253R3R8R5R179R6tgoR0y44:flixel%2Fflixel-ui%2Fimg%2Fbutton_toggle.pngR2i534R3R8R5R180R6tgoR0y41:flixel%2Fflixel-ui%2Fimg%2Ffinger_big.pngR2i1724R3R8R5R181R6tgoR0y49:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_right.pngR2i511R3R8R5R182R6tgoR0y43:flixel%2Fflixel-ui%2Fimg%2Fchrome_light.pngR2i214R3R8R5R183R6tgoR0y46:flixel%2Fflixel-ui%2Fimg%2Fbutton_arrow_up.pngR2i493R3R8R5R184R6tgoR0y44:flixel%2Fflixel-ui%2Fxml%2Fdefault_popup.xmlR2i1848R3R4R5R185R6tgoR0y39:flixel%2Fflixel-ui%2Fxml%2Fdefaults.xmlR2i1263R3R4R5R186R6tgoR0y53:flixel%2Fflixel-ui%2Fxml%2Fdefault_loading_screen.xmlR2i1953R3R4R5R187R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	var manifest = lime_utils_AssetManifest.parse(data,ManifestResources.rootPath);
 	var library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -16301,23 +16303,6 @@ lime_text_Font.prototype = {
 	}
 	,__class__: lime_text_Font
 };
-var _$_$ASSET_$_$assets_$fonts_$pixel_$otf = $hx_exports["__ASSET__assets_fonts_pixel_otf"] = function() {
-	this.ascender = 1125;
-	this.descender = -250;
-	this.height = 1375;
-	this.numGlyphs = 262;
-	this.underlinePosition = -143;
-	this.underlineThickness = 20;
-	this.unitsPerEM = 1000;
-	this.name = "Pixel Arial 11 Bold";
-	lime_text_Font.call(this);
-};
-$hxClasses["__ASSET__assets_fonts_pixel_otf"] = _$_$ASSET_$_$assets_$fonts_$pixel_$otf;
-_$_$ASSET_$_$assets_$fonts_$pixel_$otf.__name__ = "__ASSET__assets_fonts_pixel_otf";
-_$_$ASSET_$_$assets_$fonts_$pixel_$otf.__super__ = lime_text_Font;
-_$_$ASSET_$_$assets_$fonts_$pixel_$otf.prototype = $extend(lime_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$assets_$fonts_$pixel_$otf
-});
 var _$_$ASSET_$_$assets_$fonts_$vcr_$ttf = $hx_exports["__ASSET__assets_fonts_vcr_ttf"] = function() {
 	this.ascender = 1800;
 	this.descender = 0;
@@ -16334,6 +16319,23 @@ _$_$ASSET_$_$assets_$fonts_$vcr_$ttf.__name__ = "__ASSET__assets_fonts_vcr_ttf";
 _$_$ASSET_$_$assets_$fonts_$vcr_$ttf.__super__ = lime_text_Font;
 _$_$ASSET_$_$assets_$fonts_$vcr_$ttf.prototype = $extend(lime_text_Font.prototype,{
 	__class__: _$_$ASSET_$_$assets_$fonts_$vcr_$ttf
+});
+var _$_$ASSET_$_$assets_$fonts_$pixel_$otf = $hx_exports["__ASSET__assets_fonts_pixel_otf"] = function() {
+	this.ascender = 1125;
+	this.descender = -250;
+	this.height = 1375;
+	this.numGlyphs = 262;
+	this.underlinePosition = -143;
+	this.underlineThickness = 20;
+	this.unitsPerEM = 1000;
+	this.name = "Pixel Arial 11 Bold";
+	lime_text_Font.call(this);
+};
+$hxClasses["__ASSET__assets_fonts_pixel_otf"] = _$_$ASSET_$_$assets_$fonts_$pixel_$otf;
+_$_$ASSET_$_$assets_$fonts_$pixel_$otf.__name__ = "__ASSET__assets_fonts_pixel_otf";
+_$_$ASSET_$_$assets_$fonts_$pixel_$otf.__super__ = lime_text_Font;
+_$_$ASSET_$_$assets_$fonts_$pixel_$otf.prototype = $extend(lime_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$assets_$fonts_$pixel_$otf
 });
 var _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__flixel_fonts_nokiafc22_ttf"] = function() {
 	this.ascender = 2048;
@@ -16443,16 +16445,6 @@ openfl_text_Font.prototype = $extend(lime_text_Font.prototype,{
 	,__class__: openfl_text_Font
 	,__properties__: {set_fontName:"set_fontName",get_fontName:"get_fontName"}
 });
-var _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf = $hx_exports["__ASSET__OPENFL__assets_fonts_pixel_otf"] = function() {
-	this.__fromLimeFont(new _$_$ASSET_$_$assets_$fonts_$pixel_$otf());
-	openfl_text_Font.call(this);
-};
-$hxClasses["__ASSET__OPENFL__assets_fonts_pixel_otf"] = _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf;
-_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf.__name__ = "__ASSET__OPENFL__assets_fonts_pixel_otf";
-_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf.__super__ = openfl_text_Font;
-_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf.prototype = $extend(openfl_text_Font.prototype,{
-	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf
-});
 var _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$vcr_$ttf = $hx_exports["__ASSET__OPENFL__assets_fonts_vcr_ttf"] = function() {
 	this.__fromLimeFont(new _$_$ASSET_$_$assets_$fonts_$vcr_$ttf());
 	openfl_text_Font.call(this);
@@ -16462,6 +16454,16 @@ _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$vcr_$ttf.__name__ = "__ASSET__OPENFL__asse
 _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$vcr_$ttf.__super__ = openfl_text_Font;
 _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$vcr_$ttf.prototype = $extend(openfl_text_Font.prototype,{
 	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$vcr_$ttf
+});
+var _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf = $hx_exports["__ASSET__OPENFL__assets_fonts_pixel_otf"] = function() {
+	this.__fromLimeFont(new _$_$ASSET_$_$assets_$fonts_$pixel_$otf());
+	openfl_text_Font.call(this);
+};
+$hxClasses["__ASSET__OPENFL__assets_fonts_pixel_otf"] = _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf;
+_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf.__name__ = "__ASSET__OPENFL__assets_fonts_pixel_otf";
+_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf.__super__ = openfl_text_Font;
+_$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf.prototype = $extend(openfl_text_Font.prototype,{
+	__class__: _$_$ASSET_$_$OPENFL_$_$assets_$fonts_$pixel_$otf
 });
 var _$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf = $hx_exports["__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf"] = function() {
 	this.__fromLimeFont(new _$_$ASSET_$_$flixel_$fonts_$nokiafc22_$ttf());
@@ -17887,13 +17889,13 @@ Paths.json = function(key,library) {
 	return Paths.getPath("data/" + key + ".json","TEXT",library);
 };
 Paths.sound = function(key,library) {
-	return Paths.getPath("sounds/" + key + "." + "ogg","SOUND",library);
+	return Paths.getPath("sounds/" + key + "." + "mp3","SOUND",library);
 };
 Paths.soundRandom = function(key,min,max,library) {
 	return Paths.sound(key + flixel_FlxG.random.int(min,max),library);
 };
 Paths.music = function(key,library) {
-	return Paths.getPath("music/" + key + "." + "ogg","MUSIC",library);
+	return Paths.getPath("music/" + key + "." + "mp3","MUSIC",library);
 };
 Paths.voices = function(song) {
 	song = StringTools.replace(song," ","-");
@@ -17920,7 +17922,7 @@ var PauseSubState = function(x,y) {
 	this.curSelected = 0;
 	this.menuItems = ["Resume","Restart Song","Exit to menu"];
 	MusicBeatSubstate.call(this);
-	this.pauseMusic = new flixel_system_FlxSound().loadEmbedded(Paths.getPath("music/" + "breakfast" + "." + "ogg","MUSIC",null),true,true);
+	this.pauseMusic = new flixel_system_FlxSound().loadEmbedded(Paths.getPath("music/" + "breakfast" + "." + "mp3","MUSIC",null),true,true);
 	this.pauseMusic.set_volume(0);
 	this.pauseMusic.play(false,flixel_FlxG.random.int(0,this.pauseMusic._length / 2 | 0));
 	flixel_FlxG.sound.list.add(this.pauseMusic);
@@ -20083,7 +20085,7 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 			Highscore.saveScore(PlayState.SONG.song,Math.round(this.songScore),PlayState.storyDifficulty);
 		}
 		if(PlayState.offsetTesting) {
-			flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "ogg","MUSIC",null));
+			flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "mp3","MUSIC",null));
 			PlayState.offsetTesting = false;
 			var nextState = LoadingState.getNextState(new OptionsMenu(),false);
 			if(flixel_FlxG.game._state.switchTo(nextState)) {
@@ -20094,7 +20096,7 @@ PlayState.prototype = $extend(MusicBeatState.prototype,{
 			PlayState.campaignScore += Math.round(this.songScore);
 			HxOverrides.remove(PlayState.storyPlaylist,PlayState.storyPlaylist[0]);
 			if(PlayState.storyPlaylist.length <= 0) {
-				flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "ogg","MUSIC",null));
+				flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "mp3","MUSIC",null));
 				this.transIn = flixel_addons_transition_FlxTransitionableState.defaultTransIn;
 				this.transOut = flixel_addons_transition_FlxTransitionableState.defaultTransOut;
 				var nextState = new StoryMenuState();
@@ -21647,7 +21649,7 @@ StoryMenuState.prototype = $extend(MusicBeatState.prototype,{
 		this.transOut = flixel_addons_transition_FlxTransitionableState.defaultTransOut;
 		if(flixel_FlxG.sound.music != null) {
 			if(flixel_FlxG.sound.music._channel == null) {
-				flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "ogg","MUSIC",null));
+				flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "mp3","MUSIC",null));
 			}
 		}
 		this.persistentUpdate = this.persistentDraw = true;
@@ -22163,7 +22165,7 @@ TitleState.prototype = $extend(MusicBeatState.prototype,{
 			flixel_addons_transition_FlxTransitionableState.defaultTransOut = new flixel_addons_transition_TransitionData("fade",-16777216,0.7,new flixel_math_FlxPoint(0,1),{ asset : diamond, width : 32, height : 32},new flixel_math_FlxRect(-200,-200,flixel_FlxG.width * 1.4,flixel_FlxG.height * 1.4));
 			this.transIn = flixel_addons_transition_FlxTransitionableState.defaultTransIn;
 			this.transOut = flixel_addons_transition_FlxTransitionableState.defaultTransOut;
-			flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "ogg","MUSIC",null),0);
+			flixel_FlxG.sound.playMusic(Paths.getPath("music/" + "freakyMenu" + "." + "mp3","MUSIC",null),0);
 			var _this = flixel_FlxG.sound.music;
 			var Duration = 4;
 			var From = 0;
@@ -108699,7 +108701,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 243853;
+	this.version = 311160;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
@@ -161373,7 +161375,8 @@ Note.RED_NOTE = 3;
 OutdatedSubState.leftState = false;
 OutdatedSubState.needVer = "IDFK LOL";
 OutdatedSubState.currChanges = "dk";
-Paths.SOUND_EXT = "ogg";
+Paths.SOUND_EXT = "mp3";
+Paths.SONG_SOUND_EXT = "ogg";
 PlayState.instance = null;
 PlayState.curStage = "";
 PlayState.isStoryMode = false;
