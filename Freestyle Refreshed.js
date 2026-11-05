@@ -8118,7 +8118,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 		if(!this.debugMode) {
 			switch(this.curCharacter) {
 			case "gf":
-				if(!StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8128,7 +8128,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-car":
-				if(!StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8138,7 +8138,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-christmas":
-				if(!StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8148,7 +8148,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-pixel":
-				if(!StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8158,7 +8158,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "gf-pixel-glitch":
-				if(!StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -8168,7 +8168,7 @@ Character.prototype = $extend(flixel_FlxSprite.prototype,{
 				}
 				break;
 			case "pico-gf":
-				if(!StringTools.startsWith(this.animation._curAnim.name,"hair")) {
+				if(this.animation._curAnim == null || !StringTools.startsWith(this.animation._curAnim.name,"hair")) {
 					this.danced = !this.danced;
 					if(this.danced) {
 						this.playAnim("danceRight");
@@ -108701,7 +108701,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 311160;
+	this.version = 27403;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = "lime.utils.AssetCache";
